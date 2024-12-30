@@ -1,4 +1,4 @@
-import supabase from "../supabase";
+import supabase from "../database/supabase";
 
 describe("Environment", () => {
   test("supabase is defined", () => {
