@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "target": "es2022",
-    "module": "es2022",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,

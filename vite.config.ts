@@ -5,5 +5,5 @@ export default defineConfig({
   plugins: [react()],
   root: "src/web",
   envDir: "../..",
-  publicDir: "..",
+  publicDir: "../../public",
 });
