@@ -1,12 +1,16 @@
 import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 
-let supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-let supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+let supabaseUrl: string | undefined;
+let supabaseKey: string | undefined;
 
-if (!supabaseUrl || !supabaseKey) {
+if (import.meta && import.meta.env && import.meta.env.MODE) {
+  // Vite environment
+  supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+} else {
+  // Node.js environment, use dotenv to load .env variables
   dotenv.config();
-
   supabaseUrl = process.env.SUPABASE_URL;
   supabaseKey = process.env.SUPABASE_KEY;
 }
