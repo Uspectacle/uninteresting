@@ -1,4 +1,15 @@
 {
-  "cSpell.words": ["supabase"],
+  "cSpell.words": [
+    "formatversion",
+    "intitle",
+    "pageids",
+    "searchinfo",
+    "srnamespace",
+    "srsearch",
+    "srsort",
+    "srwhat",
+    "supabase",
+    "totalhits"
+  ],
   "editor.formatOnSave": true
 }
