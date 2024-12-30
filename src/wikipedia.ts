@@ -11,7 +11,10 @@ const containsNumber = (input: string, number: string | number): boolean => {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Function to check if a Wikipedia article exists for a given ID
-const queryTitles = async (titles: string | number): Promise<boolean> => {
+const queryTitles = async (
+  search: string | number,
+  tentative = 0
+): Promise<boolean> => {
   const apiUrl = `https://en.wikipedia.org/w/api.php`;
 
   try {
@@ -20,34 +23,34 @@ const queryTitles = async (titles: string | number): Promise<boolean> => {
         action: "query",
         format: "json",
         list: "search",
-        titles: titles,
+        titles: search,
         redirects: 1,
         formatversion: 2,
-        srsearch: "intitle:" + titles,
+        srsearch: "intitle:" + search,
         srnamespace: 0,
         srwhat: "text",
         srsort: "just_match",
       },
     });
 
+    if (!response.data.query) throw "corrupted data";
+
     const pages: any[] = [
-      ...(response?.data?.query?.pages || []),
-      ...(response?.data?.query?.search || []),
+      ...response.data.query.pages,
+      ...response.data.query.search,
     ];
 
-    return pages.some((page) => containsNumber(page.title, titles));
+    return pages.some((page) => containsNumber(page.title, search));
   } catch (error: any) {
-    if (error.response?.status === 429) {
-      const headers = error.response.headers;
-      const retryAfter = parseInt(headers["retry-after"], 10) || 1;
-      // Retry after time in seconds
-      console.log(`Rate limit hit. Retrying after ${retryAfter} seconds...`);
-      await sleep(retryAfter * 1000); // Sleep for the retry time
+    if (tentative > 10) throw error;
 
-      return queryTitles(titles); // Retry the request
-    }
+    const headers = error.response.headers;
+    const retryAfter = parseInt(headers["retry-after"], 10) || 1;
+    // Retry after time in seconds
+    console.log(`Rate limit hit. Retrying after ${retryAfter} seconds...`);
+    await sleep(retryAfter * 1000); // Sleep for the retry time
 
-    throw error; // Rethrow the error if not rate limit related
+    return queryTitles(search, tentative + 1); // Retry the request
   }
 };
 
@@ -87,7 +90,10 @@ export const wikipediaTitle = async (
 };
 
 // Function to check if a Wikipedia article exists for a given ID
-const queryAny = async (search: string | number): Promise<boolean> => {
+const queryAny = async (
+  search: string | number,
+  tentative = 0
+): Promise<boolean> => {
   const apiUrl = `https://en.wikipedia.org/w/api.php`;
 
   try {
@@ -103,19 +109,19 @@ const queryAny = async (search: string | number): Promise<boolean> => {
       },
     });
 
+    if (!response.data.query) throw "corrupted data";
+
     return response.data.query.searchinfo.totalhits;
   } catch (error: any) {
-    if (error.response?.status === 429) {
-      const headers = error.response.headers;
-      const retryAfter = parseInt(headers["retry-after"], 10) || 1;
-      // Retry after time in seconds
-      console.log(`Rate limit hit. Retrying after ${retryAfter} seconds...`);
-      await sleep(retryAfter * 1000); // Sleep for the retry time
+    if (tentative > 10) throw error;
 
-      return queryTitles(search); // Retry the request
-    }
+    const headers = error.response.headers;
+    const retryAfter = parseInt(headers["retry-after"], 10) || 1;
+    // Retry after time in seconds
+    console.log(`Rate limit hit. Retrying after ${retryAfter} seconds...`);
+    await sleep(retryAfter * 1000); // Sleep for the retry time
 
-    throw error; // Rethrow the error if not rate limit related
+    return queryAny(search, tentative + 1); // Retry the request
   }
 };
 
