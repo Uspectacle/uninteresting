@@ -153,5 +153,3 @@ export const wikipediaAny = async (
 
   return -1;
 };
-
-wikipediaAny();
