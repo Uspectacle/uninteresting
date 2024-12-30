@@ -3,7 +3,9 @@ import { wikipediaTitle, wikipediaAny } from "./wikipedia";
 
 const main = async () => {
   try {
+    console.log(`updating wikipediaTitle...`);
     await updateNumber("wikipediaTitle", await wikipediaTitle());
+    console.log(`updating wikipedia...`);
     await updateNumber("wikipedia", await wikipediaAny());
     process.exit(0);
   } catch (error) {

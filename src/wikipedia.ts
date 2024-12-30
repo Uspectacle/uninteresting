@@ -31,8 +31,8 @@ const queryTitles = async (titles: string | number): Promise<boolean> => {
     });
 
     const pages: any[] = [
-      ...response.data.query.pages,
-      ...response.data.query.search,
+      ...(response.data.query.pages || []),
+      ...(response.data.query.search || []),
     ];
 
     return pages.some((page) => containsNumber(page.title, titles));
