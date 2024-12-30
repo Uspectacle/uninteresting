@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 const getEnvVars = () => {
   try {
     // Check for Vite environment
-    if (typeof import.meta !== "undefined") {
+    if (globalThis && 'import' in globalThis && 'meta' in import) {
       return {
         supabaseUrl: import.meta.env.VITE_SUPABASE_URL,
         supabaseKey: import.meta.env.VITE_SUPABASE_KEY,
