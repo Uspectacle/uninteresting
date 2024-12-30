@@ -33,7 +33,7 @@ const queryTitles = async (
       },
     });
 
-    if (!response.data.query) throw "corrupted data";
+    if (!response?.data?.query) throw "corrupted data";
 
     const pages: any[] = [
       ...response.data.query.pages,
@@ -44,8 +44,8 @@ const queryTitles = async (
   } catch (error: any) {
     if (tentative > 10) throw error;
 
-    const headers = error.response.headers;
-    const retryAfter = parseInt(headers["retry-after"], 10) || 1;
+    const retryAfter =
+      parseInt(error?.response?.headers?.["retry-after"] || "", 10) || 1;
     // Retry after time in seconds
     console.log(`Rate limit hit. Retrying after ${retryAfter} seconds...`);
     await sleep(retryAfter * 1000); // Sleep for the retry time
@@ -109,14 +109,14 @@ const queryAny = async (
       },
     });
 
-    if (!response.data.query) throw "corrupted data";
+    if (!response?.data?.query) throw "corrupted data";
 
     return response.data.query.searchinfo.totalhits;
   } catch (error: any) {
     if (tentative > 10) throw error;
 
-    const headers = error.response.headers;
-    const retryAfter = parseInt(headers["retry-after"], 10) || 1;
+    const retryAfter =
+      parseInt(error?.response?.headers?.["retry-after"] || "", 10) || 1;
     // Retry after time in seconds
     console.log(`Rate limit hit. Retrying after ${retryAfter} seconds...`);
     await sleep(retryAfter * 1000); // Sleep for the retry time
