@@ -11,7 +11,8 @@
     "srsort",
     "srwhat",
     "supabase",
-    "totalhits"
+    "totalhits",
+    "VITE"
   ],
   "editor.formatOnSave": true
 }
