@@ -29,6 +29,10 @@ jobs:
 
       - name: Build project
         run: npm run build:frontend
+        env:
+          CI: true
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
       - name: Upload production-ready build files
         uses: actions/upload-pages-artifact@v3
@@ -47,7 +51,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        env:
-          CI: true
-          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          VITE_SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
