@@ -4,7 +4,7 @@
     "module": "ESNext", // Use ECMAScript modules
     "moduleResolution": "Bundler", // Use bundler-style resolution for Vite
     "jsx": "react-jsx", // Support JSX without importing React
-    "outDir": "./dist/frontend", // Output directory for compiled files
+    "outDir": "./dist", // Output directory for compiled files
     "types": ["vite/client"] // Include Vite client types
   },
   "include": ["src/frontend/**/*", "src/shared/**/*"]

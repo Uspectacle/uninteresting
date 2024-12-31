@@ -10,21 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "22"
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
 
       - name: Build TypeScript
-        run: npm run build
+        run: npm run build:backend
 
       - name: Run update script
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: npm prod:update-database
+        run: npm run start:update-database
