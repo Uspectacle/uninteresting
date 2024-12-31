@@ -4,14 +4,16 @@
   "description": "List uninteresting numbers from the web",
   "main": "dist/script/updateDatabase.js",
   "scripts": {
-    "build": "tsc && vite build",
-    "prod:update-database": "node dist/script/updateDatabase.js",
-    "dev:update-database": "ts-node src/script/updateDatabase.ts",
-    "prod:web": "vite preview",
-    "dev:web": "vite",
+    "dev": "vite",
+    "build:frontend": "tsc -p tsconfig.frontend.json && vite build",
+    "preview": "vite preview",
+    "build:backend": "tsc -p tsconfig.backend.json",
+    "start:update-database": "node dist/backend/script/updateDatabase.js",
+    "dev:update-database": "ts-node -P tsconfig.backend.json src/backend/script/updateDatabase.ts",
+    "build": "npm run build:backend && npm run build:frontend",
     "test": "jest",
-    "lint": "eslint src/**/*.ts",
-    "type-check": "tsc --noEmit"
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "type-check": "tsc -p tsconfig.frontend.json --noEmit && tsc -p tsconfig.backend.json --noEmit"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import { NumberEntry } from "../../database/API";
-import { fetchDescription } from "../markdown";
+import { NumberEntry } from "../../../shared/database";
+import { fetchDescription } from "../../utils/markdown";
 
 type Props = {
   entry: NumberEntry;

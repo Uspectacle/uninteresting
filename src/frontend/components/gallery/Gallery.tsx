@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { NumberDisplay } from "./NumberDisplay";
 import "./gallery.css";
 import React from "react";
-import { getNumbers, NumberEntry } from "../../database/API";
+import { NumberEntry } from "../../../shared/database";
+import database from "../../utils/database";
 
 export default function Gallery() {
   const [numbers, setNumbers] = useState<NumberEntry[]>([]);
@@ -15,7 +16,7 @@ export default function Gallery() {
 
   const fetchNumbers = async () => {
     try {
-      const data = await getNumbers();
+      const data = await database.getNumbers();
 
       setNumbers(data);
     } catch (error) {

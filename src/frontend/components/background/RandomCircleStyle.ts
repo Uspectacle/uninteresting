@@ -8,14 +8,12 @@ const randomState = () => {
       Math.random() * 120 - 10
     }vw, ${Math.random() * 120 - 10}vh)`,
     opacity: scaleSeed / 3,
-    "text-shadow": `0px 0px ${6 - scaleSeed * 5}px ${COLOR}`,
+    "box-shadow": `0px 0px ${6 - scaleSeed * 5}px ${scaleSeed * 5}px ${COLOR}`,
   };
 };
 
 export const randomKeyframes = (index: string | number) => {
   const DefaultState = randomState();
-
-  console.log(DefaultState);
 
   return `
     @keyframes randomMovement-${index} {
@@ -43,9 +41,11 @@ export const randomStyle = (index: string | number) => {
 
   return {
     animation: `randomMovement-${index} ${animationDuration}s cubic-bezier(0.4, 0.1, 0.7, 1) infinite`,
-    fontSize: `${Math.random() * 4}em`,
+    width: `${Math.random() * 200}px`,
     position: "fixed",
+    borderRadius: "50%",
+    aspectRatio: "1",
     mixBlendMode: "color-burn",
-    color: COLOR,
+    backgroundColor: COLOR,
   };
 };

@@ -1,7 +1,7 @@
 import React from "react";
-import { Digits } from "./background/Digits";
 import "./main.css";
-import Gallery from "./gallery/Gallery";
+import { Digits } from "./components/background/Digits";
+import Gallery from "./components/gallery/Gallery";
 
 export default function App() {
   return (

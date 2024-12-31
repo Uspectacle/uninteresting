@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2022", // Modern JavaScript features supported by Node.js and modern browsers
+    "lib": ["es2022", "dom", "dom.iterable"], // Include DOM types for frontend development
+
+    /* Modules */
+    "moduleResolution": "bundler", // Default to bundler for better Vite support
+    "baseUrl": "./src", // Enable absolute imports from src
+    "paths": {
+      // Path aliases for cleaner imports
+      "@backend/*": ["backend/*"],
+      "@frontend/*": ["frontend/*"],
+      "@shared/*": ["shared/*"]
+    },
+
+    /* JavaScript Support */
+    "allowJs": true, // Allow JavaScript files
+    "checkJs": true, // Type check JavaScript files
+
+    /* Emit */
+    "sourceMap": true, // Generate source maps for debugging
+
+    /* Type Checking */
+    "strict": true, // Enable all strict type checking options
+    "noUncheckedIndexedAccess": true, // Add undefined to indexed access
+    "noImplicitReturns": true, // Report error when not all code paths return
+
+    /* Completeness */
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true // Ensure consistent casing in imports
+  },
+  "exclude": ["node_modules", "dist"]
+}

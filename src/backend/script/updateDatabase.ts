@@ -1,11 +1,11 @@
-import { updateNumber } from "../database/API";
+import database from "../api/database";
 import { mainSearch } from "../scraper/search";
 import { queryTitle, queryAny } from "../scraper/wikipedia";
 
 const main = async () => {
   try {
     console.log("=== Updating wikipediaTitle ===");
-    await updateNumber(
+    await database.updateNumber(
       "wikipediaTitle",
       await mainSearch({
         minNumber: 2000,
@@ -15,7 +15,7 @@ const main = async () => {
     );
 
     console.log("=== Updating wikipedia ===");
-    await updateNumber(
+    await database.updateNumber(
       "wikipedia",
       await mainSearch({
         minNumber: 756000,

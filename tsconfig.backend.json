@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext", // Use Node.js module system
+    "moduleResolution": "NodeNext", // Node.js-style module resolution
+    "outDir": "./dist", // Output directory for compiled files
+    "types": ["node", "jest"] // Include Node.js and Jest type definitions
+  },
+  "include": ["src/backend/**/*", "src/shared/**/*"]
+}
